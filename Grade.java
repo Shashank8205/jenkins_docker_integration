@@ -1,50 +1,42 @@
 import java.util.Scanner;
 
-public class Grade {
+public class Grade{
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+  // Returns a letter grade based on the average
+  static char gradeFunction(double avg) {
+    if (avg >= 90) return 'A';
+    else if (avg >= 80) return 'B';
+    else if (avg >= 70) return 'C';
+    else if (avg >= 60) return 'D';
+    else return 'F';
+  }
 
-        // Input marks
-        System.out.print("Enter marks for Subject 1: ");
-        int s1 = sc.nextInt();
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter marks for Subject 2: ");
-        int s2 = sc.nextInt();
+    System.out.print("How many grades (1 to 5)? ");
+    int count = scanner.nextInt();
 
-        System.out.print("Enter marks for Subject 3: ");
-        int s3 = sc.nextInt();
-
-        System.out.print("Enter marks for Subject 4: ");
-        int s4 = sc.nextInt();
-
-        System.out.print("Enter marks for Subject 5: ");
-        int s5 = sc.nextInt();
-
-        // Calculate total and percentage
-        int total = s1 + s2 + s3 + s4 + s5;
-        double percentage = total / 5.0;
-
-        // Determine grade
-        char grade;
-
-        if (percentage >= 90) {
-            grade = 'A';
-        } else if (percentage >= 75) {
-            grade = 'B';
-        } else if (percentage >= 60) {
-            grade = 'C';
-        } else if (percentage >= 50) {
-            grade = 'D';
-        } else {
-            grade = 'F';
-        }
-
-        // Output results
-        System.out.println("\nTotal Marks: " + total);
-        System.out.println("Percentage: " + percentage + "%");
-        System.out.println("Grade: " + grade);
-
-        sc.close();
+    // Validate the input count
+    if (count < 1 || count > 5) {
+      System.out.println("Invalid number. You must enter between 1 and 5 grades.");
+      scanner.close();
+      return; // Exit
     }
+
+    double sum = 0.0;
+
+    // Read each grade
+    for (int i = 1; i <= count; i++) {
+      System.out.print("Enter grade " + i + ": ");
+      double grade = scanner.nextDouble();
+      sum += grade;
+    }
+
+    double avg = sum / count;
+    System.out.println("Average: " + avg);
+    System.out.println("Letter grade: " + gradeFunction(avg));
+
+    scanner.close();
+  }
 }
